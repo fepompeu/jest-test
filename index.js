@@ -65,21 +65,22 @@ const getAccount = (accountNumber) => {
 };
 
 const fetchFirstNumberAccountOnly = (quantity) => {
-  if (quantity < 0) {
-    console.log("The value is negative, it must be positive");
-    return false;
-  } else if (typeof quantity === "string") {
+  if (quantity >= 0) {
+    if (typeof quantity !== "string") {
+      if (quantity < accountDatabase.length) {
+        accountDatabase.forEach((account) => {
+          console.log(account);
+        });
+        return true;
+      }
+      console.log("Quantity is greater than the number of accounts registered");
+      return false;
+    }
     console.log("The value is a string, it must be an integer positive");
     return false;
-  } else if (quantity > accountDatabase.length) {
-    console.log("Quantity is greater than the number of accounts registered");
-    return false;
-  } else {
-    accountDatabase.forEach((account) => {
-      console.log(account);
-    });
-    return true;
   }
+  console.log("The value is negative, it must be positive");
+  return false;
 };
 
 const withDrawAndCheckTheBalance = (amount, accountNumber) => {
